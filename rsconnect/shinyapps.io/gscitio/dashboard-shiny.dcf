@@ -1,0 +1,10 @@
+name: dashboard-shiny
+title:
+username:
+account: gscitio
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 338761
+bundleId: 1363763
+url: https://gscitio.shinyapps.io/dashboard-shiny/
+when: 1525819771.94478

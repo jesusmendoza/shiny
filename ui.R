@@ -1,32 +1,39 @@
+# Load packages ----
 library(shiny)
+library(maps)
+library(mapproj)
+library(leaflet)
+library(PBSmapping)
+library(shinythemes)
+# Load data ----
 
-# Define UI for app that draws a histogram ----
-ui <- fluidPage(
+
+# Source helper functions -----
+source("helpers.R")
+
+# User interface ----
+ui <- fluidPage(theme = shinytheme("flatly"),
+  titlePanel("censusVis"),
   
-  # App title ----
-  titlePanel("Hello Shiny!"),
-  
-  # Sidebar layout with input and output definitions ----
   sidebarLayout(
-    
-    # Sidebar panel for inputs ----
     sidebarPanel(
+      helpText("Create demographic maps with 
+               information from the 2010 US Census."),
       
-      # Input: Slider for the number of bins ----
-      sliderInput(inputId = "bins",
-                  label = "Number of bins:",
-                  min = 1,
-                  max = 50,
-                  value = 30)
+      selectInput("var", 
+                  label = "Choose a variable to display",
+                  choices = c("Percent White", "Percent Black",
+                              "Percent Hispanic", "Percent Asian"),
+                  selected = "Percent White"),
       
-    ),
+      sliderInput("range", 
+                  label = "Range of interest:",
+                  min = 0, max = 100, value = c(0, 100))
+      ),
     
-    # Main panel for displaying outputs ----
-    mainPanel(
-      
-      # Output: Histogram ----
-      plotOutput(outputId = "distPlot")
-      
-    )
+    mainPanel(m)
   )
-)
+  )
+
+
+
